@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -40,7 +40,7 @@ export class AuthService {
   signup(email: string, password: string) {
     this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(userData => {
       const newUser: User = {email: email, cashier: true, admin: false};
-      this.afs.collection('users').doc(userData.uid).set(newUser);
+      this.afs.collection('users').doc(userData.user.uid).set(newUser);
     });
 
   }
